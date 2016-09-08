@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>報告</h1>
+
+
+  <%= form_tag "/reminds/slack", method: :get do %>
+    <h2>依頼</h2>
+    <%= react_component("Form", {prefix: "m"}) %>
+
+    <h2>通常</h2>
+    <%= react_component("Form", {prefix: "n"}) %>
+
+    <h2>チャレンジ</h2>
+    <%= react_component("Form", {prefix: "c"}) %>
+
+    <h2>学習</h2>
+    <%= react_component("Form", {prefix: "l"}) %>
+
+    <%= submit_tag "slackで送る", class: "btn btn-default" %>
+  <% end %>
+</div>
