@@ -24,12 +24,12 @@ ActiveRecord::Schema.define(version: 20160908103726) do
     t.integer  "importance",  default: 50
     t.integer  "urgency",     default: 50
     t.integer  "progress",    default: 0
-    t.integer  "week",        default: 0
+    t.integer  "frequency",   default: 0
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["date"], name: "index_tasks_on_date", using: :btree
+    t.index ["frequency"], name: "index_tasks_on_frequency", using: :btree
     t.index ["progress"], name: "index_tasks_on_progress", using: :btree
-    t.index ["week"], name: "index_tasks_on_week", using: :btree
   end
 
 end
