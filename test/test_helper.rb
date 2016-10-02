@@ -9,7 +9,7 @@ class ActiveSupport::TestCase
 
   DatabaseRewinder.strategy = :transcation
 
-  after { DatabaseRewinder.clean }
+  teardown { DatabaseRewinder.clean }
 
   # Add more helper methods to be used by all tests here...
 end
