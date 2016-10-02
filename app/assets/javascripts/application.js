@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require materialize-sprockets
 //= require turbolinks
 //= require react
 //= require react_ujs

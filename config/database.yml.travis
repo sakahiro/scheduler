@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+
+test:
+  <<: *default
+  username: travis
+  password:
+  database: travis_test
+staging:
+  <<: *default
+  username: travis
+  password:
+  database: travis_staging
+production:
+  <<: *default
+  username: travis
+  password:
+  database: travis_production
