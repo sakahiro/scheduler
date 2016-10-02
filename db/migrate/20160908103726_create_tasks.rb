@@ -9,7 +9,7 @@ class CreateTasks < ActiveRecord::Migration[5.0]
       t.integer :importance, default: 50
       t.integer :urgency, default: 50
       t.integer :progress, default: 0, index: true
-      t.integer :week, default: 0, index: true
+      t.integer :frequency, default: 0, index: true
 
       t.timestamps
     end

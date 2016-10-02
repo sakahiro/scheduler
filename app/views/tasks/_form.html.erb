@@ -1,0 +1,62 @@
+<%= form_for(task) do |f| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.text_field :title %>
+      <%= f.label :title %>
+    </div>
+    <div class="input-field col s6">
+      <%= f.date_field :date, class: "datepicker" %>
+      <%= f.label :date %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s4">
+      <%= f.select :plan_time do %>
+        <%= (1..10).each do |i| %>
+          <%= content_tag(:option, i * 10) %>
+        <% end %>
+      <% end %>
+      <%= f.label :plan_time %>
+      <label>plan time</label>
+    </div>
+    <div class="input-field col s4">
+    <%= f.range_field :importance, in: 0..100 %>
+      <%= f.label :importance %>
+    </div>
+    <div class="input-field col s4">
+      <%= f.range_field :urgency, in: 0..100 %>
+      <%= f.label :urgency %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.radio_button :frequency, :today %>
+      <%= f.label :frequency_today, "today only" %>
+      <%= f.radio_button :frequency, :every_week %>
+      <%= f.label :frequency_every_week, "every week" %>
+      <%= f.radio_button :frequency, :every_day %>
+      <%= f.label :frequency_every_day, "every day" %>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <%= f.text_area :memo, class: "materialize-textarea" %>
+      <%= f.label :memo %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
