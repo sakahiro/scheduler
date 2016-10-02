@@ -2,7 +2,7 @@ require 'test_helper'
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @task = tasks(:one)
+    @task = build(:task)
   end
 
   test "should get index" do
@@ -17,28 +17,36 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
   test "should create task" do
     assert_difference('Task.count') do
-      post tasks_url, params: { task: {  } }
+      post tasks_url, params: {
+       task: { title: @task.title, date: @task.date }
+     }
     end
 
     assert_redirected_to task_url(Task.last)
   end
 
   test "should show task" do
+    @task.save
     get task_url(@task)
     assert_response :success
   end
 
   test "should get edit" do
+    @task.save
     get edit_task_url(@task)
     assert_response :success
   end
 
   test "should update task" do
-    patch task_url(@task), params: { task: {  } }
+    @task.save
+    patch task_url(@task), params: {
+     task: { title: @task.title, date: @task.date }
+   }
     assert_redirected_to task_url(@task)
   end
 
   test "should destroy task" do
+    @task.save
     assert_difference('Task.count', -1) do
       delete task_url(@task)
     end
