@@ -2,4 +2,6 @@
 
 <%= render 'form', task: @task %>
 
-<%= link_to 'Back', tasks_path %>
+<%= link_to tasks_path do %>
+  <i class="small material-icons">list</i>
+<% end %>

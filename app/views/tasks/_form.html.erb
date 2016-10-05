@@ -11,50 +11,52 @@
     </div>
   <% end %>
 
-  <div class="row">
-    <div class="input-field col s6">
-      <%= f.text_field :title %>
-      <%= f.label :title %>
-    </div>
-    <div class="input-field col s6">
-      <%= f.date_field :date, class: "datepicker" %>
-      <%= f.label :date %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field col s4">
-      <%= f.select :plan_time do %>
-        <%= (1..10).each do |i| %>
-          <%= content_tag(:option, i * 10) %>
-        <% end %>
-      <% end %>
-      <%= f.label :plan_time %>
-      <label>plan time</label>
-    </div>
-    <div class="input-field col s4">
-    <%= f.range_field :importance, in: 0..100 %>
-      <%= f.label :importance %>
-    </div>
-    <div class="input-field col s4">
-      <%= f.range_field :urgency, in: 0..100 %>
-      <%= f.label :urgency %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="input-field col s6">
-      <%= f.radio_button :frequency, :today %>
-      <%= f.label :frequency_today, "today only" %>
-      <%= f.radio_button :frequency, :every_week %>
-      <%= f.label :frequency_every_week, "every week" %>
-      <%= f.radio_button :frequency, :every_day %>
-      <%= f.label :frequency_every_day, "every day" %>
-  </div>
-  <div class="row">
-    <div class="input-field col s12">
-      <%= f.text_area :memo, class: "materialize-textarea" %>
-      <%= f.label :memo %>
-    </div>
-  </div>
+  <table>
+    <tbody>
+      <tr>
+        <td class="input-field col s4">
+          <%= f.text_field :title %>
+          <%= f.label :title %>
+        </td>
+        <td class="input-field col s4">
+          <%= f.date_field :date, class: "datepicker" %>
+          <%= f.label :date %>
+        </td>
+      </tr>
+      <tr>
+        <td class="input-field col s4">
+          <%= f.select :plan_time, [
+            ["1Man-Hr", 1], ["2Man-Hr", 2], ["3Man-Hr", 3]
+          ] %>
+          <%= f.label :plan_time %>
+        </td>
+        <td class="input-field col s4">
+          <%= f.radio_button :frequency, :today %>
+          <%= f.label :frequency_today, "today only" %>
+          <%= f.radio_button :frequency, :every_week %>
+          <%= f.label :frequency_every_week, "every week" %>
+          <%= f.radio_button :frequency, :every_day %>
+          <%= f.label :frequency_every_day, "every day" %>
+        </td>
+      </tr>
+      <tr>
+        <td class="input-field col s4">
+          <%= f.range_field :importance, in: 0..100 %>
+          <%= f.label :importance %>
+        </td>
+        <td class="input-field col s4">
+          <%= f.range_field :urgency, in: 0..100 %>
+          <%= f.label :urgency %>
+        </td>
+      </tr>
+      <tr>
+        <td class="input-field col s12">
+          <%= f.text_area :memo, class: "materialize-textarea" %>
+          <%= f.label :memo %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
   <div class="actions">
     <%= f.submit %>
