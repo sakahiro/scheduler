@@ -2,7 +2,13 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @today_tasks = Task.today.doing
+    @not_today_tasks = Task.not_today.doing
+  end
+
+  def complete
+    @today_tasks = Task.today.done
+    @not_today_tasks = Task.not_today.done
   end
 
   def show
@@ -27,7 +33,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to @task, notice: 'Task was successfully updated.'
+      redirect_to tasks_path, notice: 'Task was successfully updated.'
     else
       render :edit
     end

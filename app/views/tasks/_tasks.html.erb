@@ -1,0 +1,41 @@
+<ul class="collection">
+  <li class="collection-item avatar row col s12">
+    <div class="first-content col s10">
+      <div class="task-summary col s7">
+        <i class="material-icons circle valign">list</i>
+        <p class="title">
+          <%= task.title %>
+          <span class="new badge red" data-badge-caption="">urgency</span>
+        </p>
+        <p><%= task.plan_time %></p>
+        <p class="trancate"><%= task.memo %></p>
+      </div>
+      <div class="input-field collection-item-done col s3">
+        <%= form_for task, class: "row col s12" do |f| %>
+          <div class="input-field col s10 task-input-field">
+            <%= f.select :actual_time, [
+              ["doing", nil], ["1Man-Hr", 1], ["2Man-Hr", 2], ["3Man-Hr", 3]
+            ] %>
+            <%= f.label :actual_time%>
+          </div>
+          <div class="input-field col s2 task-input-field">
+            <%= button_tag type: :submit, class: "btn waves-effect" do %>
+              <i class="small material-icons">done</i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="secondary-content bottom-icon">
+      <%= link_to task do %>
+        <i class="small material-icons">visibility</i>
+      <% end %>
+      <%= link_to edit_task_path(task) do %>
+        <i class="small material-icons">mode_edit</i>
+      <% end %>
+      <%= link_to task, method: :delete, data: { confirm: "Are you sure?" } do %>
+        <i class="small material-icons">delete</i>
+      <% end %>
+    </div>
+  </li>
+</ul>
