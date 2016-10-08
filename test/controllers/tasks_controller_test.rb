@@ -39,10 +39,10 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
   test "should update task" do
     @task.save
-    patch task_url(@task), params: {
+    put task_url(@task), params: {
      task: { title: @task.title, date: @task.date }
    }
-    assert_redirected_to task_url(@task)
+    assert_redirected_to tasks_url
   end
 
   test "should destroy task" do

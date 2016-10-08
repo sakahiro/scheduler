@@ -1,11 +1,7 @@
-<div class="tasks">
+<div class="tasks-complete">
   <p id="notice"><%= notice %></p>
 
-  <h1>Tasks</h1>
-
-  <%= link_to new_task_path do %>
-    <i class="small material-icons">add</i>
-  <% end %>
+  <h1>Complate Tasks</h1>
 
   <h2>Today's Tasks</h2>
   <%= render partial: "tasks", collection: @today_tasks, as: :task %>
