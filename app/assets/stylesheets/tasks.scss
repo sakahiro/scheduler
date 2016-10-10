@@ -1,6 +1,27 @@
+.task-collection-item{
+  padding-left: 0 !important;
+}
 .task-input-field {
   margin-top: 0;
+  input.select-dropdown {
+    margin-bottom: 0px !important;
+  }
 }
 .bottom-icon {
-  top: 60px !important;
+  top: 50px !important;
+}
+.first-content {
+  position: relative;
+}
+.task-summary {
+  position: relative;
+}
+.secondary-badge {
+  right: 80px !important;
+}
+.task-icon {
+  font-size: 3rem !important;
+}
+.task-icon-wrapper {
+  width: 4rem !important;
 }

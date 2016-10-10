@@ -9,7 +9,7 @@ class TasksController < ApplicationController
   def complete
     @finished_today_tasks = Task.today.finished
     @finished_not_today_tasks = Task.not_today.finished
-    @not_sent_today_tasks = Task.done
+    @not_sent_today_tasks = Task.today.done
   end
 
   def show

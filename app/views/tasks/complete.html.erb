@@ -13,8 +13,9 @@
         <%= fi.hidden_field :date %>
       <% end %>
     <% end %>
-
-    <%= submit_tag "slackで送る", :disabled => false, :disable_with => "Please wait..." %>
+    <%= button_tag type: :submit, disabled: false, disable_with: "Please wait...", class: "btn waves-effect" do %>
+      <i class="small material-icons">send</i>
+    <% end %>
   <% end %>
 
 
