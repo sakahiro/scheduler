@@ -9,6 +9,7 @@ class Task < ApplicationRecord
 
   enum progress: [:planed, :doing, :done, :sent]
   enum frequency: [:today, :every_week, :every_day]
+  enum purpose: [:work, :challenge, :study]
 
   scope :today, -> { where(date: Date.current).order(urgency: :desc) }
   scope :not_today, -> { where.not(date: Date.current).order(:date) }

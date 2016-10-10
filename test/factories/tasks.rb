@@ -5,5 +5,6 @@ FactoryGirl.define do
     plan_time 10
     actual_time nil
     memo "a" * 200
+    purpose :work
   end
 end

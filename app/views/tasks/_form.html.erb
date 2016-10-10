@@ -38,6 +38,14 @@
           <%= f.radio_button :frequency, :every_day %>
           <%= f.label :frequency_every_day, "every day" %>
         </td>
+        <td class="input-field col s4">
+          <%= f.radio_button :purpose, :work %>
+          <%= f.label :purpose_work, "work" %>
+          <%= f.radio_button :purpose, :challenge %>
+          <%= f.label :purpose_challenge, "challenge" %>
+          <%= f.radio_button :purpose, :study %>
+          <%= f.label :purpose_study, "study" %>
+        </td>
       </tr>
       <tr>
         <td class="input-field col s4">

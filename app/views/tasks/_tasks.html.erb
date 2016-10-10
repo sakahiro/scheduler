@@ -2,7 +2,13 @@
   <li class="collection-item avatar row task-collection-item">
     <div class="first-content col s12">
       <div class="col s1 task-icon-wrapper">
-        <i class="material-icons task-icon">assignment</i>
+        <% if task.purpose == "work" %>
+          <i class="material-icons task-icon">work</i>
+        <% elsif task.purpose == "challenge" %>
+          <i class="material-icons task-icon">trending_up</i>
+        <% elsif task.purpose == "study" %>
+          <i class="material-icons task-icon">border_color</i>
+        <% end %>
       </div>
       <div class="task-summary col s6">
         <p class="title">

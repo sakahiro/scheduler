@@ -9,7 +9,6 @@ class TasksController < ApplicationController
   def complete
     @finished_today_tasks = Task.today.finished
     @finished_not_today_tasks = Task.not_today.finished
-    @not_sent_today_tasks = Task.today.done
   end
 
   def show
@@ -46,16 +45,35 @@ class TasksController < ApplicationController
   end
 
   def slack
-    return redirect_to complete_tasks_path, notice: "all tasks were sent" if params[:tasks].nil?
-    @today_tasks = Task.today.done
-    @today_tasks.update_all(progress: :sent)
-    text = "学習 \n"
-    params[:tasks].keys.each do |id|
-      text <<
-      "#{params[:tasks][id][:title]}  #{params[:tasks][id][:date]} \n"
+    not_sent_today_tasks = Task.today.done
+    return redirect_to complete_tasks_path, notice: "all tasks were sent" if not_sent_today_tasks.blank?
+    grouped_tasks = not_sent_today_tasks.group_by{ |task| task.purpose }
+    text = ""
+    if grouped_tasks["work"].present?
+      text << "【業務】 \n"
+      grouped_tasks["work"].each do |work_task|
+        text <<
+        "#{work_task.title}  #{work_task.date} \n"
+      end
+    end
+    if grouped_tasks["challenge"].present?
+      text << "【チャレンジ】 \n"
+      grouped_tasks["challenge"].each do |challenge_task|
+        text <<
+        "#{challenge_task.title}  #{challenge_task.date} \n"
+      end
+    end
+    if grouped_tasks["study"].present?
+      text << "【学習】 \n"
+      grouped_tasks["study"].each do |study_task|
+        text <<
+        "#{study_task.title}  #{study_task.date} \n"
+      end
     end
 
     Slack.send_message(text)
+
+    not_sent_today_tasks.update_all(progress: :sent)
 
     redirect_to complete_tasks_path
   end
@@ -67,8 +85,8 @@ class TasksController < ApplicationController
 
     def task_params
       params.require(:task).permit(
-        :title, :date, :plan_time, :actual_time,
-        :importance, :urgency, :progress, :frequency, :memo
+        :title, :date, :plan_time, :actual_time, :importance,
+        :urgency, :progress, :frequency, :memo, :purpose
       )
     end
 end
