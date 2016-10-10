@@ -45,7 +45,7 @@ class TasksController < ApplicationController
   end
 
   def slack
-    not_sent_today_tasks = Task.today.done
+    not_sent_today_tasks = Task.done
     return redirect_to complete_tasks_path, notice: "all tasks were sent" if not_sent_today_tasks.blank?
     grouped_tasks = not_sent_today_tasks.group_by{ |task| task.purpose }
     text = ""
