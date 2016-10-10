@@ -7,7 +7,7 @@ class Task < ApplicationRecord
   validates :importance, numericality: { less_than_or_equal_to: 100 }
   validates :urgency, numericality: { less_than_or_equal_to: 100 }
 
-  enum progress: [:plan, :doing, :done]
+  enum progress: [:plan, :doing, :done, :sent]
   enum frequency: [:today, :every_week, :every_day]
 
   scope :today, -> { where(date: Date.current).order(urgency: :desc) }
