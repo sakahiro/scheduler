@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  resources :tasks
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root to: 'reminds#new'
+  resources :tasks do
+    collection do
+      get 'complete'
+      get 'slack'
+    end
+  end
 
-  get '/complete_tasks', to: 'tasks#complete'
+  root to: 'tasks#index'
+
+  get 'reminds/new', to: 'reminds#new'
   get '/reminds/slack', to: 'reminds#slack'
 end

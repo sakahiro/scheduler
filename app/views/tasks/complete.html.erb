@@ -4,8 +4,21 @@
   <h1>Complate Tasks</h1>
 
   <h2>Today's Tasks</h2>
-  <%= render partial: "tasks", collection: @today_tasks, as: :task %>
+  <%= render partial: "tasks", collection: @finished_today_tasks, as: :task %>
+
+  <%= form_tag 'slack', method: :get do %>
+    <% @not_sent_today_tasks.each do |today_task| %>
+      <%= fields_for "tasks[]", today_task do |fi| %>
+        <%= fi.hidden_field :title %>
+        <%= fi.hidden_field :date %>
+      <% end %>
+    <% end %>
+    <%= button_tag type: :submit, disabled: false, disable_with: "Please wait...", class: "btn waves-effect" do %>
+      <i class="small material-icons">send</i>
+    <% end %>
+  <% end %>
+
 
   <h2>All Tasks</h2>
-  <%= render partial: "tasks", collection: @not_today_tasks, as: :task %>
+  <%= render partial: "tasks", collection: @finished_not_today_tasks, as: :task %>
 </div>

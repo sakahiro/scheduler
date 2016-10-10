@@ -1,11 +1,16 @@
 <ul class="collection">
-  <li class="collection-item avatar row col s12">
-    <div class="first-content col s10">
-      <div class="task-summary col s7">
-        <i class="material-icons circle valign">list</i>
+  <li class="collection-item avatar row task-collection-item">
+    <div class="first-content col s12">
+      <div class="col s1 task-icon-wrapper">
+        <i class="material-icons task-icon">assignment</i>
+      </div>
+      <div class="task-summary col s6">
         <p class="title">
           <%= task.title %>
-          <span class="new badge red" data-badge-caption="">urgency</span>
+          <% if task.urgency > 50 %>
+            <span class="new badge red" data-badge-caption="">urgency</span>
+          <% end %>
+          <span class="secondary-badge new badge blue" data-badge-caption=""><%= task.progress %></span>
         </p>
         <p><%= task.plan_time %></p>
         <p class="trancate"><%= task.memo %></p>
@@ -17,6 +22,7 @@
               ["doing", nil], ["1Man-Hr", 1], ["2Man-Hr", 2], ["3Man-Hr", 3]
             ] %>
             <%= f.label :actual_time%>
+            <%= f.hidden_field(:progress, value: :done) %>
           </div>
           <div class="input-field col s2 task-input-field">
             <%= button_tag type: :submit, class: "btn waves-effect" do %>
