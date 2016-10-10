@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908103726) do
+ActiveRecord::Schema.define(version: 20161010130939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160908103726) do
     t.integer  "frequency",   default: 0
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "purpose",     default: 0,  null: false
     t.index ["date"], name: "index_tasks_on_date", using: :btree
     t.index ["frequency"], name: "index_tasks_on_frequency", using: :btree
     t.index ["progress"], name: "index_tasks_on_progress", using: :btree
