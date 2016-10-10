@@ -7,13 +7,17 @@ class Task < ApplicationRecord
   validates :importance, numericality: { less_than_or_equal_to: 100 }
   validates :urgency, numericality: { less_than_or_equal_to: 100 }
 
-  enum progress: [:plan, :doing, :done, :sent]
+  enum progress: [:planed, :doing, :done, :sent]
   enum frequency: [:today, :every_week, :every_day]
 
   scope :today, -> { where(date: Date.current).order(urgency: :desc) }
   scope :not_today, -> { where.not(date: Date.current).order(:date) }
   scope :high_priority, -> { where("urgency > 50") }
   scope :row_priority, -> { where("urgency <= 50") }
-  scope :done, -> { where.not(actual_time: nil) }
-  scope :doing, -> { where(actual_time: nil) }
+  scope :planed, -> { where(progress: :planed) }
+  scope :doing, -> { where(progress: :doing) }
+  scope :done, -> { where(progress: :done) }
+  scope :sent, -> { where(progress: :sent) }
+  scope :not_finished, -> { planed.or(doing) }
+  scope :finished, -> { done.or(sent)}
 end

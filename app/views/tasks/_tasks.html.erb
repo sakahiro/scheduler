@@ -17,6 +17,7 @@
               ["doing", nil], ["1Man-Hr", 1], ["2Man-Hr", 2], ["3Man-Hr", 3]
             ] %>
             <%= f.label :actual_time%>
+            <%= f.hidden_field(:progress, value: :done) %>
           </div>
           <div class="input-field col s2 task-input-field">
             <%= button_tag type: :submit, class: "btn waves-effect" do %>

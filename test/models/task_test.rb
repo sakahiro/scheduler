@@ -40,15 +40,16 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal(Task.row_priority, [row_priority_task])
   end
 
-  test ".done" do
-    done_task = create(:task, actual_time: 1)
-    doing = create(:task)
+  test "progress scope" do
+    planed_task = create(:task, progress: 0)
+    doing_task = create(:task, progress: 1)
+    done_task = create(:task, progress: 2)
+    sent_task = create(:task, progress: 3)
+    assert_equal(Task.planed, [planed_task])
+    assert_equal(Task.doing, [doing_task])
     assert_equal(Task.done, [done_task])
-  end
-
-  test ".doing" do
-    done_task = create(:task, actual_time: 1)
-    doing = create(:task)
-    assert_equal(Task.doing, [doing])
+    assert_equal(Task.sent, [sent_task])
+    assert_equal(Task.not_finished, [planed_task, doing_task])
+    assert_equal(Task.finished, [done_task, sent_task])
   end
 end

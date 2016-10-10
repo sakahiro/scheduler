@@ -2,13 +2,14 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @today_tasks = Task.today.doing
-    @not_today_tasks = Task.not_today.doing
+    @today_tasks = Task.today.not_finished
+    @not_today_tasks = Task.not_today.not_finished
   end
 
   def complete
-    @today_tasks = Task.today.done
-    @not_today_tasks = Task.not_today.done
+    @finished_today_tasks = Task.today.finished
+    @finished_not_today_tasks = Task.not_today.finished
+    @not_sent_today_tasks = Task.done
   end
 
   def show
@@ -45,6 +46,7 @@ class TasksController < ApplicationController
   end
 
   def slack
+    return redirect_to complete_tasks_path, notice: "all tasks were sent" if params[:tasks].nil?
     @today_tasks = Task.today.done
     @today_tasks.update_all(progress: :sent)
     text = "学習 \n"
